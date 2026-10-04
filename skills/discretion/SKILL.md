@@ -21,7 +21,7 @@ Core principle: **carry the load.** Find the facts yourself. Make the call yours
 
 Default: **act.** Run four checks. Any "ask" wins → ask. Otherwise decide, do it, and tell them what you did.
 
-1. **Fact or decision?** Facts are your job. Check the files, docs, standards, and web. Only *decisions* reach the user. Never ask what you can find out.
+1. **Fact or decision?** Facts are your job. Check the files, docs, standards, and web. Only _decisions_ reach the user. Never ask what you can find out.
 2. **One-way or two-way door?** Reversible and cheap → decide. Irreversible, expensive, or high-blast-radius (deletes data, ships publicly, spends money, changes a schema others depend on) → confirm first.
 3. **Whose call is it?** Taste, values, priorities, money, business, anything where two reasonable people would differ → the user's. Implementation inside their established stack and conventions → yours.
 4. **Can you defer or design for reversal?** If the decision can wait, or you can make a reversible choice and note it, don't ask now.
@@ -93,13 +93,14 @@ When the user answers a recurring question (a preference, convention, or default
 
 ## Rationalization table
 
-| Excuse | Reality |
-|---|---|
-| "Better to ask than assume." | Not for lookups or reversible trivia. Asking has a cost; spend it only on real forks. |
-| "They might want to choose the library." | Weigh it: if their stack and standards make one option clearly right, recommend it. Ask only if it's genuinely their call. |
-| "It's a big change, so I should ask." | Size isn't the test; reversibility is. A big reversible change can be done-and-told. |
-| "I'll ask the whole list one at a time." | Batch them, number them, recommend each. |
-| "I'll ask so I don't have to figure it out." | That's offloading your job. Research first. |
+| Excuse                                                | Reality                                                                                                                    |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| "Better to ask than assume."                          | Not for lookups or reversible trivia. Asking has a cost; spend it only on real forks.                                      |
+| "They might want to choose the library."              | Weigh it: if their stack and standards make one option clearly right, recommend it. Ask only if it's genuinely their call. |
+| "It's a big change, so I should ask."                 | Size isn't the test; reversibility is. A big reversible change can be done-and-told.                                       |
+| "I'll ask the whole list one at a time."              | Batch them, number them, recommend each.                                                                                   |
+| "It's important, so I'll ask several things at once." | Importance argues for confirming the one one-way door, not for a pile of questions. One card, with a recommended default.  |
+| "I'll ask so I don't have to figure it out."          | That's offloading your job. Research first.                                                                                |
 
 ## References
 
