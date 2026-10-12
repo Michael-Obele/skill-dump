@@ -1,6 +1,6 @@
 ---
 name: executive-loop
-description: 'Use when a task needs judgment instead of step-by-step instruction: underspecified or ambiguous asks, multi-step agent work, long-horizon builds, "figure it out", "do the needful", "just handle it", or any moment where a model is about to guess, overthink, skip verification, or spin without progress. Gives fast and cheap models the supervisory loop that frontier models run by default: frame the task, source context just in time, decide ask vs act vs escalate, size effort to the step, check against the environment, and stop cleanly. Load it whenever a cheaper model is doing real work on its own.'
+description: 'Use when a task needs judgment instead of step-by-step instruction: underspecified or ambiguous asks, multi-step agent work, long-horizon builds, "figure it out", "do the needful", "just handle it", or any moment where a model is about to guess, overthink, skip verification, spin without progress, or grill the user with questions it could have answered itself. Gives fast and cheap models the supervisory loop that frontier models run by default: frame the task, source context just in time, decide ask vs act vs escalate, size effort to the step, check against the environment, and stop cleanly. Defaults to acting; when a question is truly needed it arrives as one batched card with a recommended default, never a drip. Load it whenever a cheaper model is doing real work on its own.'
 ---
 
 # Executive Loop
@@ -59,7 +59,7 @@ point: a judgment you cannot state is a judgment the model cannot act on.
 |-------|--------------------|----------|
 | **F** Frame | What exactly is the deliverable, and what would make it wrong? | one-line contract + the 1-3 ways this fails |
 | **S** Source | What is the smallest set of facts I need, and where do they live? | the sources, in the order you will read them |
-| **D** Decide | Can I settle this myself, or must I ask or escalate? | the branch taken, and why |
+| **D** Decide | Can I settle this myself, or must I ask or escalate? | act, or one batched question |
 | **A** Act | What effort does *this* step deserve? | the action itself |
 | **C** Check | What external signal proves it worked? | the command run, file read, or output seen |
 | **X** Exit | Done, blocked, or out of depth? | done, or an escalation. No third state. |
@@ -104,9 +104,34 @@ Rules:
 
 ## D: Decide, ask, or escalate
 
-This is where cheap models lose the most. The DiscoBench benchmark (2026) tested
-eleven frontier models on ambiguous multi-hop questions and found the best reached only
-43.1% end to end, mostly because of *interaction strategy*, not retrieval:
+**Default: act.** Most forks in a task are yours to settle, not the user's to be asked
+about. A question costs an interruption and a turn, and often buys a worse answer than
+you would have picked yourself. Spend questions only on real forks.
+
+### The gate: decide or ask
+
+Run four checks in order. **Any check that says "ask" wins.** If none of them do, decide,
+do it, and say what you did in one line. Then move on.
+
+1. **Fact or decision?** Facts are your job. Read the file, run the command, check the
+docs. Only decisions reach the user. Never ask for something you can find out. This is
+the most common waste of a question.
+2. **One-way or two-way door?** Reversible and cheap: just decide. Irreversible or wide
+blast radius (deletes data, ships publicly, spends money, changes a schema others
+depend on): confirm first.
+3. **Whose call is it?** Taste, priorities, money, business, or anything where two
+reasonable people would differ: theirs. Implementation inside their stack and
+conventions: yours.
+4. **Can you defer, or design for reversal?** If it can wait, or you can take the
+reversible option and note it, do that instead of asking now.
+
+Reversibility is the test. Not size, and not importance. A large reversible change can
+be done and told. A one-line irreversible one cannot.
+
+### Look before you ask
+
+DiscoBench (2026) tested eleven frontier models on ambiguous multi-hop questions. The
+best reached 43.1% end to end. The difference was interaction strategy, not retrieval:
 
 | Behaviour at an ambiguous point | Checkpoint success |
 |---|---|
@@ -114,32 +139,74 @@ eleven frontier models on ambiguous multi-hop questions and found the best reach
 | Guess without asking | 56.5% |
 | Keep searching, still guess | 51.9% |
 
-Searching harder is worse than guessing. That is the whole lesson: more effort in the
-wrong branch is negative value.
+Two lessons, and they pull in opposite directions, so hold both:
 
-**The decision table. Apply it in order and take the first row that matches.**
+- **Look before you ask.** Source first (phase **S**), then ask about whatever survives.
+  Guessing is bad at 56.5%, and searching harder while still guessing is worst at 51.9%.
+  More effort in the wrong branch is negative value.
+- **Looking is not an excuse to never ask.** Once a real fork survives sourcing, ask it.
+  That is the 93.4% row.
 
-| Situation | Do this |
+The same benchmark showed that detecting ambiguity and asking a *good* question are
+different skills. A prompt telling models to watch for ambiguity raised detection F1
+from 45.3 to 64.9, but end results only from 28.6 to 33.7. Awareness without a usable
+question changes nothing. And "Could you clarify?" is not a question, it is a wasted
+turn. Name the entities or criteria you cannot distinguish.
+
+### When you do ask: one low-load card
+
+Never drip, and never grill. One interruption, one card, easy to answer.
+
+- **Lead with your recommendation.** A clear default defuses the choice; the user can
+  just agree. Options with no recommendation push the whole decision back at them.
+- **One decision per question.** Never compound. Trade-off questions drain the most.
+- **Batch everything open into one numbered round.** Three questions asked one at a time
+  is three interruptions.
+- **At most four options, and prefer yes/no.**
+- **One line of stakes**, then get out of the way.
+- **Offer a default for silence:** "reply, or I will go with A."
+
+```
+**<the decision>**: <your recommendation, one line>.
+
+- **Option A (recommended)**: <what it is>; <why, in plain words>
+- Option B: <what it is>; <why>
+
+<cost and reversibility, one line>. Reply A or B, or ignore and I will go with A.
+```
+
+**Never ask twice.** When the user answers a recurring question (a preference, a
+convention, a default), write it where it belongs (their config, a conventions file,
+memory) and treat it as settled. Re-asking something already answered is the worst kind
+of load.
+
+### The ladder: take the lightest rung that is safe
+
+1. **Silent decide.** Reversible, low stakes, inside their conventions. Just do it.
+2. **Act and tell.** You decided. Report it: what changed, why in one line, how to override.
+3. **Recommend and confirm.** A one-way door, or genuinely the user's call. One card with a default.
+4. **Question round.** Several genuinely open decisions. Batch, number, recommend each.
+
+Most work lives on rungs 1 and 2. If you find yourself living on rung 4, re-read the
+gate: it usually means you are offloading decisions that were yours to make.
+
+### Escalate when you are out of depth
+
+Escalating is not asking. Hand over: the goal, what you established (with evidence),
+where you got stuck, and the two or three options you can see. Escalating with nothing
+is not escalating, it is dumping the task back. A metacognitive module doing exactly
+this let a fast model match a much slower reasoning model at a lower cost
+(Khandelwal et al., 2025).
+
+### Rationalizations that turn into grilling
+
+| Excuse | Reality |
 |---|---|
-| A tool, file, command, or source can settle it | Go get it. Never ask a human for something you can look up. |
-| The ambiguity would change the deliverable, and no source can settle it | Ask **exactly one** question: the one whose answer splits the possibilities. |
-| The ambiguity is cosmetic; either reading gives the same deliverable | Pick the obvious default, say so in one line, and proceed. |
-| You have searched twice and are still guessing | Stop searching. Ask. |
-
-Two more things the same benchmark showed:
-
-- **Detecting ambiguity and asking a good question are different skills.** A prompt
-  that told models to watch for ambiguity raised detection F1 from 45.3 to 64.9 but
-  barely moved end results (28.6 to 33.7). Awareness is not action. You must go from
-  "this is vague" to a specific question in one move.
-- **A warning is not a question.** "Could you clarify?" is a wasted turn. Name the
-  entities or criteria you cannot distinguish.
-
-**Escalate when you are out of depth, and escalate properly.** Hand over: the goal,
-what you established (with evidence), where you got stuck, and the two or three options
-you can see. Escalating with nothing is not escalating, it is dumping the task back.
-A metacognitive module doing exactly this let a fast model match a much slower
-reasoning model at a lower cost (Khandelwal et al., 2025).
+| "Better to ask than assume." | Not for lookups or reversible trivia. A question costs a turn and often buys a worse answer than deciding. |
+| "They might want to choose." | If their stack and standards make one option clearly right, recommend it and go. |
+| "It's important, so I'll ask several things at once." | Importance argues for confirming the one one-way door, not for a pile of questions. One card. |
+| "I'll ask so I don't have to figure it out." | That is offloading your job. Research first. |
+| "I'll ask the list one at a time as they come up." | Batch them, number them, recommend each. |
 
 ## A: Size the effort to the step
 
@@ -201,6 +268,7 @@ the counter-move. Overthinking patterns are from Cuadron et al. (2025).
 | **Premature Disengagement** | Declaring done or "blocked" while the check has not run | Go to **C**. One check, then decide. |
 | **Underthinking** | Strategy-hopping: new approach every few steps, none finished | Pick the most promising line. Finish it. Only then switch. |
 | **Search-heavy guessing** | Many tool calls, still guessing at the answer | The DiscoBench 51.9% row. Stop. Ask. |
+| **Question grilling** | Three questions in a row, a question it could have looked up, or equal options with no recommendation | Run the gate in **D**. Batch into one card with a default. |
 | **Self-critique spiral** | Reviewing your own reasoning instead of checking the world | Replace with one external observation. |
 | **Uniform effort** | Same care on a typo as on a destructive migration | Re-triage in **A**. |
 | **Manufactured certainty** | A guess written in the same voice as a verified fact | Label it. "Verified" and "inferred" are different words. |
@@ -228,3 +296,7 @@ recovery is often the whole gap. When it is not, escalate, and escalate cleanly.
 ## Related Documents
 
 - [Evidence and sources](./references/evidence.md)
+- The `discretion` skill is the fuller treatment of the decide-or-ask gate and the
+  low-load question card. Load it when a task is question-heavy or the user says
+  "just decide", "stop asking", or "too many questions"; this skill carries the
+  condensed version so it works standalone.
