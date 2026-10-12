@@ -25,7 +25,7 @@ The psychology is settled and old. Flavell (1979) defined metacognition as two
 interacting processes: **monitoring** (judging your own uncertainty, performance,
 progress) and **control** (planning, strategy selection, re-allocating effort based on
 that monitoring). Ackerman and Thompson (2017) narrowed this for reasoning tasks as
-*meta-reasoning*: monitor progress, decide whether to keep going or change approach.
+_meta-reasoning_: monitor progress, decide whether to keep going or change approach.
 
 Models do the first half and skip the second.
 
@@ -61,7 +61,7 @@ Converting a self-report into a branch with a named action is what changes resul
   confidence calibration.
 
 **Counter-evidence, and it matters:** Singh et al. and others in the Yale survey report
-that metacognitive *sensitivity* trades off against raw reasoning ability in some
+that metacognitive _sensitivity_ trades off against raw reasoning ability in some
 models. Being good at reasoning and being well calibrated are not the same axis.
 
 ## Finding 3: Both overthinking and underthinking are real, and they are the same defect
@@ -89,7 +89,7 @@ Efficiency line of work: "Stop Overthinking: A Survey on Efficient Reasoning for
 Difficulty Cognition" (arXiv:2507.02663); "CAT: Confidence-Adaptive Thinking for
 Efficient Reasoning" (arXiv:2607.00862); DTSR, Xiang et al. (2026), Tier 1: reduces
 reasoning length **28.9% to 34.9%** with minimal performance loss by checking whether
-the chain of thought is *sufficient* yet.
+the chain of thought is _sufficient_ yet.
 
 **What this means for the skill:** the target is not "think more" or "think less". The
 target is knowing when to stop. Skipping and spinning get the same counter-moves.
@@ -100,7 +100,7 @@ target is knowing when to stop. Skipping and spinning get the same counter-moves
 
 - Yang et al. (2026), Tier 1, Ares: running every step at low reasoning effort instead
   of high cost nearly **20% accuracy** on gpt-oss-20b. A lightweight router (Qwen3-1.7B)
-  predicting the *lowest sufficient* effort per step cut reasoning tokens by **52.7%**
+  predicting the _lowest sufficient_ effort per step cut reasoning tokens by **52.7%**
   on TAU-Bench with no accuracy loss, and slightly better results than always-high.
 - Evaluated on TAU-Bench (tool use), BrowseComp-Plus (deep research), WebArena (web).
 
@@ -116,11 +116,11 @@ DiscoBench (Cheng et al., 2026), reported by The Decoder, Tier 2 reporting a Tie
 benchmark. 211 tasks, 463 ambiguous points, 11 knowledge domains, 11 models released in
 the previous six months:
 
-| Behaviour at an ambiguous checkpoint | Success |
-|---|---|
-| Search first, then ask a follow-up | **93.4%** |
-| Guess without asking | 56.5% |
-| Search repeatedly, still guess | 51.9% |
+| Behaviour at an ambiguous checkpoint | Success   |
+| ------------------------------------ | --------- |
+| Search first, then ask a follow-up   | **93.4%** |
+| Guess without asking                 | 56.5%     |
+| Search repeatedly, still guess       | 51.9%     |
 
 - Without any hint, the best model reached only **43.1%** end to end (Doubao Seed 2.0
   Pro); Gemini 3.1 Pro 40.8%, Claude Opus 4.7 39.8%, MiniMax M2.7 16.1%, Qwen3.6 Max 12.3%.
@@ -135,7 +135,7 @@ the previous six months:
 - Removing ambiguity entirely raised accuracy by 26.8 to 40.2 points.
 
 Supporting: Wang et al. (2025), EMNLP, "Learning to Ask: When LLM Agents Meet Unclear
-Instruction" (NoisyToolBench); Kim et al. (2021), Amazon Science, on deciding *whether*
+Instruction" (NoisyToolBench); Kim et al. (2021), Amazon Science, on deciding _whether_
 to ask a clarifying question rather than always asking.
 
 **What this means for the skill:** more searching is not a substitute for asking, and
@@ -164,7 +164,7 @@ mechanistic work.**
   and refining within existing evidence, instead of treating retrieval as the default at
   every step.
 
-**What this means for the skill:** hygiene and judgment about *when* to look beat
+**What this means for the skill:** hygiene and judgment about _when_ to look beat
 exhortations to look more.
 
 ## Finding 7: Metacognitive scaffolding can lift a cheaper model, but not by introspection
@@ -217,7 +217,7 @@ skill encodes grounding and escalation, never "reflect harder".
 **Counterweight, worth stating fairly:** elicitation work (UK AI Safety Institute and
 "The Elicitation Game", Tier 2 to 3 as reported) argues that getting a model to use what
 it already knows can be worth the equivalent of a large increase in training compute.
-The two positions are compatible: elicitation recovers *latent* capability that is
+The two positions are compatible: elicitation recovers _latent_ capability that is
 present, and cannot conjure capability that is absent.
 
 **What this means for the skill:** claim only what is defensible. A harness stops
@@ -250,30 +250,30 @@ escalate when the harness is not enough.
 
 ## Sources
 
-| # | Source | Tier | Supports |
-|---|---|---|---|
-| 1 | Flavell, "Metacognition and Cognitive Monitoring", American Psychologist 1979 | 1 | monitoring + control definition |
-| 2 | Ackerman & Thompson, "Meta-Reasoning", Trends in Cognitive Sciences 2017 | 1 | monitor and control of reasoning |
-| 3 | Kruger & Dunning, JPSP 1999; Fleming, Annual Review of Psychology 2024 | 1 | calibration failure shape |
-| 4 | [Cao et al., "LLMs Know When They Know, but Do Not Act on It", arXiv:2605.14186](https://arxiv.org/abs/2605.14186) | 1 | metacognitive harness, 48.3 to 56.9 |
-| 5 | [Khandelwal et al., "Language Models Coupled with Metacognition Can Outperform Reasoning Models", arXiv:2508.17959](https://arxiv.org/abs/2508.17959) | 1 | fast plus metacognitive module beats slow model |
-| 6 | [Barkan et al., "Do Large Language Models Know What They Are Capable Of?", arXiv:2512.24661](https://arxiv.org/abs/2512.24661) | 1 | overconfidence worsens mid-task |
-| 7 | [Cuadron et al., "The Danger of Overthinking", arXiv:2502.08235](https://arxiv.org/abs/2502.08235) | 1 | three overthinking patterns; +30% / -43% |
-| 8 | [Wang et al., "On the Underthinking of o1-Like LLMs", arXiv:2501.18585](https://arxiv.org/abs/2501.18585) | 1 | 225% / 418% token and switching figures |
-| 9 | [Yang et al., "Ares: Adaptive Reasoning Effort Selection", arXiv:2603.07915](https://arxiv.org/abs/2603.07915) | 1 | per-step effort; 20% drop; 52.7% saving |
-| 10 | [Xiang et al., "When Is Thinking Enough?", arXiv:2604.06787](https://arxiv.org/abs/2604.06787) | 1 | sufficiency check, 28.9 to 34.9% shorter |
-| 11 | [Wang et al., "Unable to Forget" (PI-LLM), arXiv:2506.08184](https://arxiv.org/abs/2506.08184) | 1 | interference; prompt fixes limited |
-| 12 | [Chen et al., "To Retrieve or To Think?", arXiv:2601.08747](https://arxiv.org/abs/2601.08747) | 1 | retrieve vs refine decision |
-| 13 | [Advani, "When Small Models Are Right for Wrong Reasons", arXiv:2601.00513](https://arxiv.org/abs/2601.00513) | 1 | grounding helps, self-critique hurts |
-| 14 | [Li et al., "ReflectEvo", ACL Findings 2025](https://aclanthology.org/2025.findings-acl.871/) | 1 | small models improve, but via training |
-| 15 | [Wang et al., "Learning to Ask", EMNLP 2025](https://aclanthology.org/2025.emnlp-main.1104.pdf) | 1 | NoisyToolBench, learning when to ask |
-| 16 | [Z. Wang et al., "Small Models Struggle to Learn from Strong Reasoners", arXiv:2502.12143](https://arxiv.org/abs/2502.12143) | 1 | Small Model Learnability Gap |
-| 17 | [DiscoBench, reported by The Decoder](https://the-decoder.com/ai-search-agents-dont-fail-at-searching-they-fail-at-asking-the-right-questions-when-queries-get-ambiguous/) | 2 | the 93.4 / 56.5 / 51.9 table; 43.1% ceiling |
-| 18 | [Anthropic, "Effective context engineering for AI agents"](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) | 1 | context rot, just-in-time, compaction |
-| 19 | [Anthropic, "Building effective agents"](https://www.anthropic.com/engineering/building-effective-agents) | 1 | simplicity first, routing |
-| 20 | [Yale NLP, "Metacognition in LLMs: Foundations, Progress, and Opportunities"](https://github.com/yale-nlp/LLM-Metacognition) | 1 | survey index, 275 papers |
-| 21 | [Ma et al., "LLMs Have Intrinsic Meta-Cognition, but Need a Good Lens", EMNLP 2025](https://aclanthology.org/2025.emnlp-main.171/) | 1 | latent metacognition |
-| 22 | [Li et al., "Adaptive Tool Use with Meta-Cognition Trigger", ACL 2025](https://aclanthology.org/2025.acl-long.655/) | 1 | tool-selection gating |
-| 23 | [AIMO 3 writeup, "Model Capability Dominates", arXiv:2603.27844](https://sophon.at/papers/pwc-57546) | 1 | every prompt-level intervention failed |
-| 24 | [Oh, "Before You think, Monitor", arXiv:2510.16374](https://arxiv.org/abs/2510.16374) | 1 | Flavell's framework applied to LLMs |
-| 25 | [Kim et al., "Deciding whether to ask clarifying questions", Amazon Science 2021](https://www.amazon.science/publications/deciding-whether-to-ask-clarifying-questions-in-large-scale-spoken-language-understanding) | 1 | asking is a decision with a cost |
+| #   | Source                                                                                                                                                                                                               | Tier | Supports                                        |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ----------------------------------------------- |
+| 1   | Flavell, "Metacognition and Cognitive Monitoring", American Psychologist 1979                                                                                                                                        | 1    | monitoring + control definition                 |
+| 2   | Ackerman & Thompson, "Meta-Reasoning", Trends in Cognitive Sciences 2017                                                                                                                                             | 1    | monitor and control of reasoning                |
+| 3   | Kruger & Dunning, JPSP 1999; Fleming, Annual Review of Psychology 2024                                                                                                                                               | 1    | calibration failure shape                       |
+| 4   | [Cao et al., "LLMs Know When They Know, but Do Not Act on It", arXiv:2605.14186](https://arxiv.org/abs/2605.14186)                                                                                                   | 1    | metacognitive harness, 48.3 to 56.9             |
+| 5   | [Khandelwal et al., "Language Models Coupled with Metacognition Can Outperform Reasoning Models", arXiv:2508.17959](https://arxiv.org/abs/2508.17959)                                                                | 1    | fast plus metacognitive module beats slow model |
+| 6   | [Barkan et al., "Do Large Language Models Know What They Are Capable Of?", arXiv:2512.24661](https://arxiv.org/abs/2512.24661)                                                                                       | 1    | overconfidence worsens mid-task                 |
+| 7   | [Cuadron et al., "The Danger of Overthinking", arXiv:2502.08235](https://arxiv.org/abs/2502.08235)                                                                                                                   | 1    | three overthinking patterns; +30% / -43%        |
+| 8   | [Wang et al., "On the Underthinking of o1-Like LLMs", arXiv:2501.18585](https://arxiv.org/abs/2501.18585)                                                                                                            | 1    | 225% / 418% token and switching figures         |
+| 9   | [Yang et al., "Ares: Adaptive Reasoning Effort Selection", arXiv:2603.07915](https://arxiv.org/abs/2603.07915)                                                                                                       | 1    | per-step effort; 20% drop; 52.7% saving         |
+| 10  | [Xiang et al., "When Is Thinking Enough?", arXiv:2604.06787](https://arxiv.org/abs/2604.06787)                                                                                                                       | 1    | sufficiency check, 28.9 to 34.9% shorter        |
+| 11  | [Wang et al., "Unable to Forget" (PI-LLM), arXiv:2506.08184](https://arxiv.org/abs/2506.08184)                                                                                                                       | 1    | interference; prompt fixes limited              |
+| 12  | [Chen et al., "To Retrieve or To Think?", arXiv:2601.08747](https://arxiv.org/abs/2601.08747)                                                                                                                        | 1    | retrieve vs refine decision                     |
+| 13  | [Advani, "When Small Models Are Right for Wrong Reasons", arXiv:2601.00513](https://arxiv.org/abs/2601.00513)                                                                                                        | 1    | grounding helps, self-critique hurts            |
+| 14  | [Li et al., "ReflectEvo", ACL Findings 2025](https://aclanthology.org/2025.findings-acl.871/)                                                                                                                        | 1    | small models improve, but via training          |
+| 15  | [Wang et al., "Learning to Ask", EMNLP 2025](https://aclanthology.org/2025.emnlp-main.1104.pdf)                                                                                                                      | 1    | NoisyToolBench, learning when to ask            |
+| 16  | [Z. Wang et al., "Small Models Struggle to Learn from Strong Reasoners", arXiv:2502.12143](https://arxiv.org/abs/2502.12143)                                                                                         | 1    | Small Model Learnability Gap                    |
+| 17  | [DiscoBench, reported by The Decoder](https://the-decoder.com/ai-search-agents-dont-fail-at-searching-they-fail-at-asking-the-right-questions-when-queries-get-ambiguous/)                                           | 2    | the 93.4 / 56.5 / 51.9 table; 43.1% ceiling     |
+| 18  | [Anthropic, "Effective context engineering for AI agents"](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)                                                                        | 1    | context rot, just-in-time, compaction           |
+| 19  | [Anthropic, "Building effective agents"](https://www.anthropic.com/engineering/building-effective-agents)                                                                                                            | 1    | simplicity first, routing                       |
+| 20  | [Yale NLP, "Metacognition in LLMs: Foundations, Progress, and Opportunities"](https://github.com/yale-nlp/LLM-Metacognition)                                                                                         | 1    | survey index, 275 papers                        |
+| 21  | [Ma et al., "LLMs Have Intrinsic Meta-Cognition, but Need a Good Lens", EMNLP 2025](https://aclanthology.org/2025.emnlp-main.171/)                                                                                   | 1    | latent metacognition                            |
+| 22  | [Li et al., "Adaptive Tool Use with Meta-Cognition Trigger", ACL 2025](https://aclanthology.org/2025.acl-long.655/)                                                                                                  | 1    | tool-selection gating                           |
+| 23  | [AIMO 3 writeup, "Model Capability Dominates", arXiv:2603.27844](https://sophon.at/papers/pwc-57546)                                                                                                                 | 1    | every prompt-level intervention failed          |
+| 24  | [Oh, "Before You think, Monitor", arXiv:2510.16374](https://arxiv.org/abs/2510.16374)                                                                                                                                | 1    | Flavell's framework applied to LLMs             |
+| 25  | [Kim et al., "Deciding whether to ask clarifying questions", Amazon Science 2021](https://www.amazon.science/publications/deciding-whether-to-ask-clarifying-questions-in-large-scale-spoken-language-understanding) | 1    | asking is a decision with a cost                |

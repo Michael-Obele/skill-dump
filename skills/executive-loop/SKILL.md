@@ -18,13 +18,13 @@ any model doing autonomous work. It matters most on the fast and cheap ones.
 
 **The judgment is often already there. The interface to act on it is not.**
 Cao et al. (2026) wrapped a fixed model in a harness that turns its own pre-solve and
-post-solve estimates into *control decisions* (trust it, retry it with feedback,
+post-solve estimates into _control decisions_ (trust it, retry it with feedback,
 aggregate several attempts) and lifted accuracy from 48.3 to 56.9 with no weight
 updates. The metacognition was latent; the wiring was missing. Wiring is exactly what
 a skill can supply.
 
 **Introspection-flavoured fixes backfire on small models.** Advani (2026) found that
-telling small models to self-critique *hurt* them (Cohen's d between -0.14 and -0.33)
+telling small models to self-critique _hurt_ them (Cohen's d between -0.14 and -0.33)
 while plain external grounding helped a lot (d between 0.23 and 0.93). So every check
 in this skill is external and observable. Never "think harder". Always "go look".
 
@@ -55,14 +55,14 @@ disease: no supervisor deciding when enough is enough.
 Run six phases. Each phase produces a written artifact, not a feeling. Writing is the
 point: a judgment you cannot state is a judgment the model cannot act on.
 
-| Phase | Question to answer | Artifact |
-|-------|--------------------|----------|
-| **F** Frame | What exactly is the deliverable, and what would make it wrong? | one-line contract + the 1-3 ways this fails |
+| Phase        | Question to answer                                                | Artifact                                     |
+| ------------ | ----------------------------------------------------------------- | -------------------------------------------- |
+| **F** Frame  | What exactly is the deliverable, and what would make it wrong?    | one-line contract + the 1-3 ways this fails  |
 | **S** Source | What is the smallest set of facts I need, and where do they live? | the sources, in the order you will read them |
-| **D** Decide | Can I settle this myself, or must I ask or escalate? | act, or one batched question |
-| **A** Act | What effort does *this* step deserve? | the action itself |
-| **C** Check | What external signal proves it worked? | the command run, file read, or output seen |
-| **X** Exit | Done, blocked, or out of depth? | done, or an escalation. No third state. |
+| **D** Decide | Can I settle this myself, or must I ask or escalate?              | act, or one batched question                 |
+| **A** Act    | What effort does _this_ step deserve?                             | the action itself                            |
+| **C** Check  | What external signal proves it worked?                            | the command run, file read, or output seen   |
+| **X** Exit   | Done, blocked, or out of depth?                                   | done, or an escalation. No third state.      |
 
 The loop is a cycle, not a line: after **C** you usually return to **A**, sometimes to **S**.
 
@@ -84,7 +84,7 @@ inventing scope that nobody asked for.
 
 Do not preload everything that might be relevant. Context is a finite attention
 budget, and every extra token makes the relevant tokens harder to find. Anthropic's
-applied team measured this as *context rot*: as tokens grow, accurate recall drops.
+applied team measured this as _context rot_: as tokens grow, accurate recall drops.
 Interference is worse than volume, and prompt-level fixes for it barely work
 (Wang et al., 2025, PI-LLM), so the fix is hygiene, not instructions.
 
@@ -114,16 +114,16 @@ Run four checks in order. **Any check that says "ask" wins.** If none of them do
 do it, and say what you did in one line. Then move on.
 
 1. **Fact or decision?** Facts are your job. Read the file, run the command, check the
-docs. Only decisions reach the user. Never ask for something you can find out. This is
-the most common waste of a question.
+   docs. Only decisions reach the user. Never ask for something you can find out. This is
+   the most common waste of a question.
 2. **One-way or two-way door?** Reversible and cheap: just decide. Irreversible or wide
-blast radius (deletes data, ships publicly, spends money, changes a schema others
-depend on): confirm first.
+   blast radius (deletes data, ships publicly, spends money, changes a schema others
+   depend on): confirm first.
 3. **Whose call is it?** Taste, priorities, money, business, or anything where two
-reasonable people would differ: theirs. Implementation inside their stack and
-conventions: yours.
+   reasonable people would differ: theirs. Implementation inside their stack and
+   conventions: yours.
 4. **Can you defer, or design for reversal?** If it can wait, or you can take the
-reversible option and note it, do that instead of asking now.
+   reversible option and note it, do that instead of asking now.
 
 Reversibility is the test. Not size, and not importance. A large reversible change can
 be done and told. A one-line irreversible one cannot.
@@ -133,11 +133,11 @@ be done and told. A one-line irreversible one cannot.
 DiscoBench (2026) tested eleven frontier models on ambiguous multi-hop questions. The
 best reached 43.1% end to end. The difference was interaction strategy, not retrieval:
 
-| Behaviour at an ambiguous point | Checkpoint success |
-|---|---|
-| Search first, then ask a follow-up | **93.4%** |
-| Guess without asking | 56.5% |
-| Keep searching, still guess | 51.9% |
+| Behaviour at an ambiguous point    | Checkpoint success |
+| ---------------------------------- | ------------------ |
+| Search first, then ask a follow-up | **93.4%**          |
+| Guess without asking               | 56.5%              |
+| Keep searching, still guess        | 51.9%              |
 
 Two lessons, and they pull in opposite directions, so hold both:
 
@@ -147,7 +147,7 @@ Two lessons, and they pull in opposite directions, so hold both:
 - **Looking is not an excuse to never ask.** Once a real fork survives sourcing, ask it.
   That is the 93.4% row.
 
-The same benchmark showed that detecting ambiguity and asking a *good* question are
+The same benchmark showed that detecting ambiguity and asking a _good_ question are
 different skills. A prompt telling models to watch for ambiguity raised detection F1
 from 45.3 to 64.9, but end results only from 28.6 to 33.7. Awareness without a usable
 question changes nothing. And "Could you clarify?" is not a question, it is a wasted
@@ -200,13 +200,13 @@ this let a fast model match a much slower reasoning model at a lower cost
 
 ### Rationalizations that turn into grilling
 
-| Excuse | Reality |
-|---|---|
-| "Better to ask than assume." | Not for lookups or reversible trivia. A question costs a turn and often buys a worse answer than deciding. |
-| "They might want to choose." | If their stack and standards make one option clearly right, recommend it and go. |
-| "It's important, so I'll ask several things at once." | Importance argues for confirming the one one-way door, not for a pile of questions. One card. |
-| "I'll ask so I don't have to figure it out." | That is offloading your job. Research first. |
-| "I'll ask the list one at a time as they come up." | Batch them, number them, recommend each. |
+| Excuse                                                | Reality                                                                                                    |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| "Better to ask than assume."                          | Not for lookups or reversible trivia. A question costs a turn and often buys a worse answer than deciding. |
+| "They might want to choose."                          | If their stack and standards make one option clearly right, recommend it and go.                           |
+| "It's important, so I'll ask several things at once." | Importance argues for confirming the one one-way door, not for a pile of questions. One card.              |
+| "I'll ask so I don't have to figure it out."          | That is offloading your job. Research first.                                                               |
+| "I'll ask the list one at a time as they come up."    | Batch them, number them, recommend each.                                                                   |
 
 ## A: Size the effort to the step
 
@@ -221,10 +221,10 @@ wrong in either direction costs you.
 
 Triage each step yourself:
 
-| Step type | Effort |
-|---|---|
-| Trivial, reversible, obvious form | Do it. No plan, no check. |
-| Routine, you have done the shape before | One pass, plus one external check. |
+| Step type                                 | Effort                                                          |
+| ----------------------------------------- | --------------------------------------------------------------- |
+| Trivial, reversible, obvious form         | Do it. No plan, no check.                                       |
+| Routine, you have done the shape before   | One pass, plus one external check.                              |
 | Novel, irreversible, or wide blast radius | Slow path: frame, source, act in small moves, verify each move. |
 
 The discriminator is **reversibility first**. A one-line change to a live config
@@ -235,12 +235,12 @@ deserves more care than a thousand-line change to a scratch file.
 Not against your own opinion of your work. Recall the small-model result: self-critique
 hurt, grounding helped. Grounding means the outside world answered back.
 
-Weak check (avoid) | Strong check (use)
----|---
-"Looks correct to me." | Ran it, exit code 0, output matches expected shape.
-"I handled the edge cases." | Fed the edge case in, saw the branch taken.
-"Tests should pass." | Ran the tests, read the failures.
-"Reads like the requirements." | Diffed against the actual requirement text.
+| Weak check (avoid)             | Strong check (use)                                  |
+| ------------------------------ | --------------------------------------------------- |
+| "Looks correct to me."         | Ran it, exit code 0, output matches expected shape. |
+| "I handled the edge cases."    | Fed the edge case in, saw the branch taken.         |
+| "Tests should pass."           | Ran the tests, read the failures.                   |
+| "Reads like the requirements." | Diffed against the actual requirement text.         |
 
 If no external signal is available, say so plainly instead of substituting confidence
 for evidence. That is a legitimate answer. Manufacturing certainty is not.
@@ -261,17 +261,17 @@ and still working on it" across many turns is a symptom, not a status.
 Both overthinking and underthinking show up as named patterns. Learn the tell, and use
 the counter-move. Overthinking patterns are from Cuadron et al. (2025).
 
-| Pattern | Tell | Counter-move |
-|---|---|---|
-| **Analysis Paralysis** | Third re-plan, no tool call, no file touched | Touch reality. Read the file, run the command. Action beats more reasoning. |
-| **Rogue Actions** | Acting past the ask, deleting, overwriting, or editing things never mentioned | Re-read phase **F**. If it is not in the contract, it is not in scope. |
-| **Premature Disengagement** | Declaring done or "blocked" while the check has not run | Go to **C**. One check, then decide. |
-| **Underthinking** | Strategy-hopping: new approach every few steps, none finished | Pick the most promising line. Finish it. Only then switch. |
-| **Search-heavy guessing** | Many tool calls, still guessing at the answer | The DiscoBench 51.9% row. Stop. Ask. |
-| **Question grilling** | Three questions in a row, a question it could have looked up, or equal options with no recommendation | Run the gate in **D**. Batch into one card with a default. |
-| **Self-critique spiral** | Reviewing your own reasoning instead of checking the world | Replace with one external observation. |
-| **Uniform effort** | Same care on a typo as on a destructive migration | Re-triage in **A**. |
-| **Manufactured certainty** | A guess written in the same voice as a verified fact | Label it. "Verified" and "inferred" are different words. |
+| Pattern                     | Tell                                                                                                  | Counter-move                                                                |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| **Analysis Paralysis**      | Third re-plan, no tool call, no file touched                                                          | Touch reality. Read the file, run the command. Action beats more reasoning. |
+| **Rogue Actions**           | Acting past the ask, deleting, overwriting, or editing things never mentioned                         | Re-read phase **F**. If it is not in the contract, it is not in scope.      |
+| **Premature Disengagement** | Declaring done or "blocked" while the check has not run                                               | Go to **C**. One check, then decide.                                        |
+| **Underthinking**           | Strategy-hopping: new approach every few steps, none finished                                         | Pick the most promising line. Finish it. Only then switch.                  |
+| **Search-heavy guessing**   | Many tool calls, still guessing at the answer                                                         | The DiscoBench 51.9% row. Stop. Ask.                                        |
+| **Question grilling**       | Three questions in a row, a question it could have looked up, or equal options with no recommendation | Run the gate in **D**. Batch into one card with a default.                  |
+| **Self-critique spiral**    | Reviewing your own reasoning instead of checking the world                                            | Replace with one external observation.                                      |
+| **Uniform effort**          | Same care on a typo as on a destructive migration                                                     | Re-triage in **A**.                                                         |
+| **Manufactured certainty**  | A guess written in the same voice as a verified fact                                                  | Label it. "Verified" and "inferred" are different words.                    |
 
 ## Report like an operator
 
@@ -283,7 +283,7 @@ the counter-move. Overthinking patterns are from Cuadron et al. (2025).
 ## The honest limit
 
 A procedure cannot add capability. Small models (under about 3B) do not reliably
-benefit from long chain-of-thought, and one competition-grade study found that *every*
+benefit from long chain-of-thought, and one competition-grade study found that _every_
 prompt-level intervention failed to close an eight-point capability gap (see
 [references/evidence.md](./references/evidence.md)). A skill is a harness, not a brain
 transplant.
