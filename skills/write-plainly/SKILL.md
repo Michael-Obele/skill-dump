@@ -1,6 +1,6 @@
 ---
 name: write-plainly
-description: Write in plain, human words. Use for any prose a person will read: emails, messages, READMEs, docs, commit bodies, blog posts, announcements, chat replies, or when a draft reads wrong and you cannot say why. Covers voice, the imagined reader, openings, specificity, the shared-context rule, the AI-writing tells to strip, and dosed playfulness. Say complex things with the simplest words.
+description: "Write in plain, human words. Use for any prose a person will read: emails, messages, READMEs, docs, commit bodies, blog posts, announcements, chat replies, or when a draft reads wrong and you cannot say why. Covers voice, the imagined reader, openings, specificity, the shared-context rule, the AI-writing tells to strip, and dosed playfulness. Say complex things with the simplest words."
 ---
 
 # Write Plainly
